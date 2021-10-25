@@ -5,7 +5,7 @@ import io.acemouty.springjwt.models.Role;
 
 import java.util.List;
 
-public interface ApplicationUserRepo
+public interface ApplicationUserService
 {
   ApplicationUser saveUser(ApplicationUser user);
   Role saveRole(Role role);
