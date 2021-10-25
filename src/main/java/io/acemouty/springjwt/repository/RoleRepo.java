@@ -1,0 +1,9 @@
+package io.acemouty.springjwt.repository;
+
+import io.acemouty.springjwt.models.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoleRepo extends JpaRepository<Role, Long>
+{
+  Role findByName(String name);
+}
