@@ -1,2 +1,10 @@
-package io.acemouty.springjwt.clientmapping;public class RoleToUser {
+package io.acemouty.springjwt.clientmapping;
+
+import lombok.Data;
+
+@Data
+public class RoleToUser
+{
+  private String username;
+  private String rolename;
 }
