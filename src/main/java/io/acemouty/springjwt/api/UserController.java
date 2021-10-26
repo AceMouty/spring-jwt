@@ -72,10 +72,10 @@ public class UserController
       try
       {
         // token is refesh token here
-        String token = authorization.substring("Bearer ".length());
+        String refresh_token = authorization.substring("Bearer ".length());
         Algorithm algo = Algorithm.HMAC256("secret".getBytes(StandardCharsets.UTF_8));
         JWTVerifier verifier = JWT.require(algo).build();
-        DecodedJWT decodedJWT = verifier.verify(token);
+        DecodedJWT decodedJWT = verifier.verify(refresh_token);
         String username = decodedJWT.getSubject();
         ApplicationUser user = userService.getUser(username);
         // TODO: Create a helper for creating a token and refresh token
@@ -91,12 +91,6 @@ public class UserController
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", userRoles)
-                .sign(algo);
-
-        String refresh_token = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000)) // 30 min timeout
-                .withIssuer(request.getRequestURL().toString())
                 .sign(algo);
 
         Map<String, String> tokens = new HashMap<>();
