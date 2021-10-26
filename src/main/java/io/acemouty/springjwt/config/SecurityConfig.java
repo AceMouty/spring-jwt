@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     // allow custom login url to be used
     http.authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/api/login").permitAll();
+            .antMatchers(HttpMethod.POST, "/api/login", "/auth/refresh").permitAll();
     http.authorizeRequests()
             .antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
     http.authorizeRequests()
